@@ -6,7 +6,6 @@ import { ChangeEvent, useRef, useState } from "react";
 import classes from "./ImagePicker.module.css";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { Timer } from "../timer/Timer";
 
 export const ImagePicker = ({ label, name }: { label: string, name: string }) => {
     const [imagePreview, setImagePreview] = useState<
@@ -68,8 +67,6 @@ export const ImagePicker = ({ label, name }: { label: string, name: string }) =>
                     Pick a image
                 </button>
             </div>
-
-            <Timer getType={type => {}} getValue={value => {}}/>
         </div>
     );
 };

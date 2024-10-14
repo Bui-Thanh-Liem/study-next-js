@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import Header from "@/components/header/Header";
 import "./globals.css";
 import HeaderBackground from "@/components/header-background/HeaderBackGround";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
     title: "NextLevel Food",
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactElement }) {
                 <HeaderBackground />
                 <Header />
                 {children}
+                <ToastContainer />
             </body>
         </html>
     );

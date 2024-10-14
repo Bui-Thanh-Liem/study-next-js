@@ -1,10 +1,10 @@
 import { DatePicker, Switch, TimePicker } from "antd";
 import type { DatePickerProps } from "antd";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //
-const formatHours = "HH:mm";
+const formatTime = "HH:mm";
 const formatDate = "DD-MM-YYYY";
 
 //
@@ -15,8 +15,20 @@ interface IPropTimerDateHours {
 
 export const TimerDateHours = ({ getDate, getTime }: IPropTimerDateHours) => {
     const toDay = dayjs();
+    const defaultDate = dayjs(toDay.format(formatDate), formatDate);
+    const defaultTime = dayjs(toDay.format(formatTime), formatTime);
     const [disable, setDisable] = useState<boolean>(true);
 
+    useEffect(() => {
+        getDate(defaultDate.format(formatDate));
+        getTime(defaultTime.format(formatTime));
+
+        return () => {
+            getDate(defaultDate.format(formatDate));
+            getTime(defaultTime.format(formatTime));
+        }
+    }, [])
+    
     // 
     const onChangeDate: DatePickerProps["onChange"] = (date, dateString) => {
         if (dateString) {
@@ -47,14 +59,14 @@ export const TimerDateHours = ({ getDate, getTime }: IPropTimerDateHours) => {
             <div className="flex gap-8">
                 <DatePicker
                     onChange={onChangeDate}
-                    defaultValue={dayjs(toDay.format(formatDate), formatDate)}
+                    defaultValue={defaultDate}
                     format={formatDate}
                     disabled={disable}
                 />
                 <TimePicker
                     onChange={onChangeHours}
-                    defaultValue={dayjs(toDay.format(formatHours), formatHours)}
-                    format={formatHours}
+                    defaultValue={defaultTime}
+                    format={formatTime}
                     disabled={disable}
                 />
             </div>

@@ -2,8 +2,9 @@
 
 import classes from './page.module.css';
 
-export default function ErrorPage({error}: any) {
-    console.log("error:::", error);
+export default function ErrorPage({error}: {error: Error}) {
+    const messageError = error.message;
+    console.log("error:::", messageError);
     
     return <h1 className={classes.error}>Error page !</h1>
 }

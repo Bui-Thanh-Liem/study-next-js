@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { PageProps } from "../../../../.next/types/app/layout";
 import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
+import { IPageProp } from "@/interfaces/common.interface";
 
-export default function DetailsMealPage(props: PageProps) {
+
+export default function DetailsMealPage(props: IPageProp) {
     const { searchParams, params } = props;
     const meal: any = getMeal(params.mealSlug);
     if(!meal) {
